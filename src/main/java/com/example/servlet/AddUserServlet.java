@@ -23,7 +23,11 @@ public class AddUserServlet extends HttpServlet {
         String path = "jsp/add.jsp";
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
-        requestDispatcher.forward(request, response);
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +40,11 @@ public class AddUserServlet extends HttpServlet {
         request.setAttribute("firstName", firstName);
         request.setAttribute("lastName", lastName);
 
-        response.sendRedirect("/add");
+        try {
+            response.sendRedirect("/add");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     //write your code here!
 }
